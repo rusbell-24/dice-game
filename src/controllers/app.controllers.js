@@ -1,8 +1,8 @@
 const controller = {}
 const connection = require('../dbconnection/connection')
+const gameModel = require('../models/game.model')
 
-
-controller.startapp = async (req, res)=>{
+controller.startApp = async (req, res)=>{
     try{
         const title = 'INDEX DESDE EL SERVIDOR'
         await connection()
@@ -13,6 +13,14 @@ controller.startapp = async (req, res)=>{
     }
     
 }
+
+controller.startGame = (req, res) => {
+    const game = gameModel(req.body);
+    game
+    .save()
+    .then((data) => res.json(data))
+    .catch((err) => res.json({message: err}));
+ }
 
 
 module.exports = controller
