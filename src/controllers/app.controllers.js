@@ -1,7 +1,17 @@
 const controller = {}
+const connection = require('../dbconnection/connection')
 
-controller.startapp =(req, res)=>{
-    res.send('CONECCION Principal')
+
+controller.startapp = async (req, res)=>{
+    try{
+        const title = 'INDEX DESDE EL SERVIDOR'
+        await connection()
+        console.log('CONNECTION OK')
+        res.render('app', {title})
+    }catch(err){
+        console.log(err)
+    }
+    
 }
 
 
